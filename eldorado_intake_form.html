@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eldorado Node — Candidate Intake</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1F3864;
+    --blue: #2E75B6;
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --cream: #FAF8F4;
+    --white: #FFFFFF;
+    --grey: #6B7280;
+    --light: #F3F4F6;
+    --border: #E5E7EB;
+    --success: #16A34A;
+    --error: #DC2626;
+    --shadow: 0 4px 24px rgba(31,56,100,0.10);
+    --shadow-lg: 0 16px 48px rgba(31,56,100,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER */
+  .header {
+    background: var(--navy);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 40px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--navy);
+    font-weight: bold;
+  }
+
+  .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  .logo-text span {
+    color: var(--gold);
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .header h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .header p {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .header-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .header-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ── FORM BODY */
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* ── SECTIONS */
+  .section {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.10s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.20s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--navy);
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--grey);
+    margin-top: 2px;
+  }
+
+  /* ── FIELDS */
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .field-row.single { grid-template-columns: 1fr; }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .field:last-child { margin-bottom: 0; }
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+
+  label .required {
+    color: var(--gold);
+    margin-left: 3px;
+  }
+
+  label .optional {
+    color: var(--grey);
+    font-weight: 400;
+    font-size: 11px;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(46,117,182,0.10);
+  }
+
+  input.error, textarea.error {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+  }
+
+  /* ── FILE UPLOAD */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    background: var(--cream);
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--blue);
+    background: rgba(46,117,182,0.04);
+  }
+
+  .upload-zone.has-file {
+    border-color: var(--success);
+    background: rgba(22,163,74,0.04);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .upload-icon { font-size: 28px; margin-bottom: 8px; }
+
+  .upload-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .upload-hint {
+    font-size: 12px;
+    color: var(--grey);
+  }
+
+  .upload-filename {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--success);
+    margin-top: 8px;
+  }
+
+  .upload-filename.visible { display: flex; }
+
+  /* ── BEHAVIOR NOTES */
+  .behavior-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .behavior-item {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .behavior-item label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .behavior-item label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .behavior-item textarea {
+    font-size: 13px;
+    background: var(--white);
+    min-height: 72px;
+    padding: 8px 10px;
+  }
+
+  /* ── INTELLIGENCE PREVIEW */
+  .intel-banner {
+    background: linear-gradient(135deg, var(--navy) 0%, #2a4a7f 100%);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .intel-icon { font-size: 32px; }
+
+  .intel-text h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .intel-text p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  .intel-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .intel-tag {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.70);
+    font-weight: 500;
+  }
+
+  .intel-tag.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ── SUBMIT */
+  .submit-section {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 24px;
+    text-align: center;
+    animation: fadeUp 0.4s 0.3s ease both;
+  }
+
+  .submit-section h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .submit-section p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-submit:hover {
+    background: #d4b05a;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+  }
+
+  .btn-submit:active { transform: translateY(0); }
+
+  .btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-submit .spinner {
+    display: none;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(31,56,100,0.3);
+    border-top-color: var(--navy);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  .btn-submit.loading .spinner { display: block; }
+  .btn-submit.loading .btn-text { opacity: 0.7; }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── RESULT */
+  .result {
+    display: none;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .result.success {
+    display: block;
+    background: rgba(22,163,74,0.12);
+    border: 1px solid rgba(22,163,74,0.3);
+    color: #14532d;
+  }
+
+  .result.error-msg {
+    display: block;
+    background: rgba(220,38,38,0.08);
+    border: 1px solid rgba(220,38,38,0.2);
+    color: #7f1d1d;
+  }
+
+  .result-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  /* ── PROGRESS TRACKER */
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 32px;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .progress-step {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  .step-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--grey);
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+
+  .step-dot.active {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .step-dot.done {
+    background: var(--success);
+    color: var(--white);
+  }
+
+  .step-line {
+    flex: 1;
+    height: 2px;
+    background: var(--border);
+    margin: 0 4px;
+  }
+
+  .step-line.done { background: var(--success); }
+
+  /* ── FIELD ERROR */
+  .field-error {
+    font-size: 11px;
+    color: var(--error);
+    margin-top: 4px;
+    display: none;
+  }
+
+  .field-error.visible { display: block; }
+
+  /* ── RESPONSIVE */
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 60px; }
+    .header-inner { padding: 32px 20px 28px; }
+    .header h1 { font-size: 26px; }
+    .field-row { grid-template-columns: 1fr; }
+    .behavior-grid { grid-template-columns: 1fr; }
+    .section { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">E</div>
+      <div class="logo-text">Eldorado <span>Node</span></div>
+    </div>
+    <h1>Candidate <em>Intelligence</em> Intake</h1>
+    <p>Submit a candidate profile for full AI-powered screening. The system will transcribe, score, and deliver a complete intelligence report to your HR inbox within minutes.</p>
+    <div class="header-meta">
+      <div class="header-badge">Groq Whisper Transcription</div>
+      <div class="header-badge">Gemini 2.5 Flash Scoring</div>
+      <div class="header-badge">Auto Report Delivery</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="container">
+
+  <!-- Intelligence Signal Preview -->
+  <div class="intel-banner">
+    <div class="intel-icon">🧠</div>
+    <div class="intel-text">
+      <h3>Intelligence signals collected in this submission</h3>
+      <p>Every field feeds directly into the AI scoring engine. The more complete the submission, the higher the scoring confidence.</p>
+      <div class="intel-tags">
+        <span class="intel-tag active">CV Analysis</span>
+        <span class="intel-tag active">Interview Transcript</span>
+        <span class="intel-tag active">Cover Letter</span>
+        <span class="intel-tag active">Communication Behavior</span>
+        <span class="intel-tag active">Professional Footprint</span>
+        <span class="intel-tag">LinkedIn Signals</span>
+        <span class="intel-tag">Portfolio</span>
+      </div>
+    </div>
+  </div>
+
+  <form id="intakeForm" novalidate>
+
+    <!-- SECTION 1: Candidate -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">👤</div>
+        <div>
+          <div class="section-title">Candidate Details</div>
+          <div class="section-subtitle">Basic identification — who is this candidate?</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="candidateName">Full Name <span class="required">*</span></label>
+          <input type="text" id="candidateName" name="candidateName" placeholder="e.g. Jordan Mitchell">
+          <div class="field-error" id="err-candidateName">Full name is required</div>
+        </div>
+        <div class="field">
+          <label for="candidateEmail">Email Address <span class="required">*</span></label>
+          <input type="email" id="candidateEmail" name="candidateEmail" placeholder="e.g. jordan@email.com">
+          <div class="field-error" id="err-candidateEmail">Valid email address is required</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="roleApplied">Role Applied For <span class="required">*</span></label>
+        <input type="text" id="roleApplied" name="roleApplied" placeholder="e.g. Senior Marketing Manager">
+        <div class="field-error" id="err-roleApplied">Role is required</div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Job Context -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+          <div class="section-title">Role Context</div>
+          <div class="section-subtitle">The AI scores the candidate against this job description</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="jobDescription">Job Description <span class="required">*</span></label>
+        <textarea id="jobDescription" name="jobDescription" rows="5" placeholder="Paste the full job description here. The AI will score the candidate specifically against these requirements..."></textarea>
+        <div class="field-error" id="err-jobDescription">Job description is required</div>
+      </div>
+
+      <div class="field">
+        <label for="coverLetter">Cover Letter <span class="optional">optional</span></label>
+        <textarea id="coverLetter" name="coverLetter" rows="4" placeholder="Paste the candidate's cover letter if submitted..."></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Files -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📁</div>
+        <div>
+          <div class="section-title">Documents & Recording</div>
+          <div class="section-subtitle">CV is parsed by Gemini · Recording is transcribed by Groq Whisper</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>CV / Resume <span class="required">*</span></label>
+          <div class="upload-zone" id="cvZone">
+            <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
+            <div class="upload-icon">📄</div>
+            <div class="upload-label">Upload CV</div>
+            <div class="upload-hint">PDF, DOC, DOCX · Max 10MB</div>
+            <div class="upload-filename" id="cvFilename">✓ <span></span></div>
+          </div>
+          <div class="field-error" id="err-cv">CV file is required</div>
+        </div>
+        <div class="field">
+          <label>Interview Recording <span class="required">*</span></label>
+          <div class="upload-zone" id="recZone">
+            <input type="file" id="recording" name="recording" accept=".mp3,.mp4,.m4a,.wav,.webm,.ogg">
+            <div class="upload-icon">🎙️</div>
+            <div class="upload-label">Upload Recording</div>
+            <div class="upload-hint">MP3, M4A, WAV, MP4 · Max 25MB</div>
+            <div class="upload-filename" id="recFilename">✓ <span></span></div>
+          </div>
+          <div class="field-error" id="err-recording">Interview recording is required</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: Behavioral Intelligence -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <div>
+          <div class="section-title">Recruiter Intelligence Notes</div>
+          <div class="section-subtitle">These signals are weighted in the final score — fill as many as possible</div>
+        </div>
+      </div>
+
+      <div class="behavior-grid">
+        <div class="behavior-item">
+          <label>
+            <span class="dot"></span>
+            Application Response Speed
+          </label>
+          <textarea name="appResponseSpeed" placeholder="e.g. Replied within 2 hours, professional tone, no typos..."></textarea>
+        </div>
+        <div class="behavior-item">
+          <label>
+            <span class="dot"></span>
+            Interview Scheduling Behavior
+          </label>
+          <textarea name="schedulingBehavior" placeholder="e.g. Confirmed same day, asked one relevant question about the role..."></textarea>
+        </div>
+        <div class="behavior-item">
+          <label>
+            <span class="dot"></span>
+            Pre-Interview Communication
+          </label>
+          <textarea name="preInterviewNotes" placeholder="e.g. Sent portfolio unprompted, followed up professionally..."></textarea>
+        </div>
+        <div class="behavior-item">
+          <label>
+            <span class="dot"></span>
+            Post-Interview Follow-Up
+          </label>
+          <textarea name="postInterviewNotes" placeholder="e.g. Sent generic thank-you with no reference to discussion..."></textarea>
+        </div>
+        <div class="behavior-item">
+          <label>
+            <span class="dot"></span>
+            LinkedIn / Online Presence
+          </label>
+          <textarea name="linkedinNotes" placeholder="e.g. 500+ connections, posts original content monthly, consistent with CV..."></textarea>
+        </div>
+        <div class="behavior-item">
+          <label>
+            <span class="dot"></span>
+            Portfolio / Work Samples
+          </label>
+          <textarea name="portfolioNotes" placeholder="e.g. Shared Behance link with 9 case studies, measurable outcomes documented..."></textarea>
+        </div>
+      </div>
+
+      <!-- Combine all behavior notes into emailResponseNotes hidden field -->
+      <input type="hidden" id="emailResponseNotes" name="emailResponseNotes">
+    </div>
+
+    <!-- SECTION 5: Additional Context -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">💬</div>
+        <div>
+          <div class="section-title">Additional Recruiter Notes</div>
+          <div class="section-subtitle">Anything else the AI should factor into the assessment</div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="additionalNotes">Free Notes <span class="optional">optional</span></label>
+        <textarea id="additionalNotes" name="additionalNotes" rows="3" placeholder="Any other observations, concerns, or context about this candidate..."></textarea>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-section">
+      <h3>Ready to run the intelligence analysis?</h3>
+      <p>The AI will transcribe the interview, parse the CV, cross-reference all signals,<br>and deliver a scored report to your HR inbox within 2–5 minutes.</p>
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <div class="spinner"></div>
+        <span class="btn-text">🚀 Submit for AI Analysis</span>
+      </button>
+      <div class="result" id="resultBox"></div>
+    </div>
+
+  </form>
+</div>
+
+<script>
+// ── CONFIG — change this to your webhook URL before deploying
+const WEBHOOK_URL = 'https://hbclurvd.rpcl.app/webhook/eldorado/intake';
+
+// ── FILE UPLOAD HANDLERS
+function setupUpload(inputId, zoneId, filenameId) {
+  const input = document.getElementById(inputId);
+  const zone  = document.getElementById(zoneId);
+  const fname = document.getElementById(filenameId);
+
+  input.addEventListener('change', () => {
+    if (input.files[0]) {
+      zone.classList.add('has-file');
+      fname.classList.add('visible');
+      fname.querySelector('span').textContent = input.files[0].name;
+      document.getElementById('err-' + inputId).classList.remove('visible');
+    }
+  });
+
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const dt = new DataTransfer();
+      dt.items.add(file);
+      input.files = dt.files;
+      input.dispatchEvent(new Event('change'));
+    }
+  });
+}
+
+setupUpload('cv', 'cvZone', 'cvFilename');
+setupUpload('recording', 'recZone', 'recFilename');
+
+// ── COMPILE BEHAVIOR NOTES
+function compileBehaviorNotes() {
+  const fields = [
+    { label: 'Application Response', name: 'appResponseSpeed' },
+    { label: 'Interview Scheduling', name: 'schedulingBehavior' },
+    { label: 'Pre-Interview',        name: 'preInterviewNotes' },
+    { label: 'Post-Interview',       name: 'postInterviewNotes' },
+    { label: 'LinkedIn / Online',    name: 'linkedinNotes' },
+    { label: 'Portfolio / Samples',  name: 'portfolioNotes' },
+  ];
+  const additional = document.getElementById('additionalNotes').value.trim();
+  const parts = [];
+  fields.forEach(f => {
+    const el = document.querySelector(`[name="${f.name}"]`);
+    if (el && el.value.trim()) parts.push(f.label + ': ' + el.value.trim());
+  });
+  if (additional) parts.push('Additional Notes: ' + additional);
+  return parts.length ? parts.join(' | ') : 'No recruiter notes provided';
+}
+
+// ── VALIDATION
+function validate() {
+  let valid = true;
+  const required = [
+    { id: 'candidateName',  check: v => v.trim().length > 1 },
+    { id: 'candidateEmail', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+    { id: 'roleApplied',    check: v => v.trim().length > 1 },
+    { id: 'jobDescription', check: v => v.trim().length > 20 },
+  ];
+  required.forEach(({ id, check }) => {
+    const el = document.getElementById(id);
+    const err = document.getElementById('err-' + id);
+    if (!check(el.value)) {
+      el.classList.add('error');
+      err.classList.add('visible');
+      valid = false;
+    } else {
+      el.classList.remove('error');
+      err.classList.remove('visible');
+    }
+  });
+
+  ['cv','recording'].forEach(id => {
+    const input = document.getElementById(id);
+    const err = document.getElementById('err-' + id);
+    if (!input.files[0]) {
+      err.classList.add('visible');
+      valid = false;
+    } else {
+      err.classList.remove('visible');
+    }
+  });
+
+  return valid;
+}
+
+// ── SUBMIT
+document.getElementById('intakeForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!validate()) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
+  // Compile behavior notes
+  document.getElementById('emailResponseNotes').value = compileBehaviorNotes();
+
+  const btn = document.getElementById('submitBtn');
+  const result = document.getElementById('resultBox');
+  btn.disabled = true;
+  btn.classList.add('loading');
+  btn.querySelector('.btn-text').textContent = 'Sending to AI Engine...';
+  result.className = 'result';
+
+  const formData = new FormData(document.getElementById('intakeForm'));
+
+  try {
+    const res = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      body: formData
+    });
+
+    let data;
+    try { data = await res.json(); } catch(e) { data = {}; }
+
+    if (res.ok) {
+      result.className = 'result success';
+      result.innerHTML = `
+        <div class="result-title">✅ Submitted Successfully</div>
+        <div>Candidate ID: <strong>${data.candidateId || 'Processing...'}</strong></div>
+        <div style="margin-top:6px;color:#166534;">The AI is now transcribing the interview, parsing the CV, and generating the intelligence report. Your HR inbox will receive the scored report within 2–5 minutes.</div>
+      `;
+      document.getElementById('intakeForm').reset();
+      document.querySelectorAll('.upload-zone').forEach(z => z.classList.remove('has-file'));
+      document.querySelectorAll('.upload-filename').forEach(f => f.classList.remove('visible'));
+    } else {
+      throw new Error(data.message || data.errorMessage || 'Submission failed (HTTP ' + res.status + ')');
+    }
+  } catch(err) {
+    result.className = 'result error-msg';
+    result.innerHTML = `
+      <div class="result-title">❌ Submission Failed</div>
+      <div>${err.message}</div>
+      <div style="margin-top:6px;">Please check your connection and try again, or contact your system administrator.</div>
+    `;
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    btn.querySelector('.btn-text').textContent = '🚀 Submit for AI Analysis';
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+});
+
+// ── CLEAR ERRORS ON INPUT
+document.querySelectorAll('input, textarea').forEach(el => {
+  el.addEventListener('input', () => {
+    el.classList.remove('error');
+    const err = document.getElementById('err-' + el.id);
+    if (err) err.classList.remove('visible');
+  });
+});
+</script>
+</body>
+</html>
